@@ -1,13 +1,25 @@
 
 import { Form, Button, Container, Card } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { iniciarSesion } from "../helpers/queries";
 
 
 const Login = () => {
   const { register, handleSubmit, formState: {errors}, reset} = useForm(); 
 
-  const onSubmit = ( usuario)=>{
+  const onSubmit = (usuario)=>{
     console.log(usuario);
+    iniciarSesion(usuario).then((respuesta)=>{
+      if(respuesta){
+        console.log('aqui esta todo bien con el usuario')
+      }else{
+        //mostrar un mensaje de error
+        console.log('Esta todo mal')
+      }
+    })
+
+
+    reset();
   }
 
   return (
@@ -19,7 +31,7 @@ const Login = () => {
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Email</Form.Label>
               <Form.Control
-                type="text"
+                type="email"
                 placeholder="Ingrese un email"
                { ...register('email', {
                 required:'El email es un dato obligatorio',
