@@ -39,9 +39,17 @@ const Login = () => {
               <Form.Control
                 type="password"
                 placeholder="Password"
-               
+               {...register('password',{
+                required: 'El password es obligatorio',
+                pattern:{
+                  value: /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/,
+                  message: 'El password debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula. No puede tener otros símbolos.'
+                }
+               })}
               />
-            
+            <Form.Text className="text-danger">
+               {errors.password?.message}
+            </Form.Text>
             </Form.Group>
             <Button variant="primary" type="submit">
               Ingresar
