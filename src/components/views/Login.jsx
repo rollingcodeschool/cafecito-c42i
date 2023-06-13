@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
-const Login = () => {
+const Login = ({setUsuarioLogueado}) => {
   const { register, handleSubmit, formState: {errors}, reset} = useForm(); 
   const navegacion = useNavigate();
 
@@ -16,6 +16,7 @@ const Login = () => {
     iniciarSesion(usuario).then((respuesta)=>{
       if(respuesta){
         sessionStorage.setItem('usuario', JSON.stringify(respuesta));
+        setUsuarioLogueado(respuesta)
         reset();
         navegacion('/administrador');
       }else{
