@@ -7,11 +7,10 @@ import Inicio from "./components/views/Inicio";
 import Registro from "./components/views/Registro";
 import Login from "./components/views/Login";
 import DetalleProducto from "./components/views/DetalleProducto";
-import CrearProducto from "./components/views/producto/CrearProducto";
-import EditarProducto from "./components/views/producto/EditarProducto";
-import Administrador from "./components/views/Administrador";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
+import RutasProtegidas from "./components/routes/RutasProtegidas";
+import RutasAdministrador from "./components/routes/RutasAdministrador";
 
 function App() {
   const usuarioSessionStorage = JSON.parse(sessionStorage.getItem('usuario')) || {}
@@ -30,20 +29,14 @@ function App() {
           element={<DetalleProducto></DetalleProducto>}
         ></Route>
         <Route
-          exact
-          path="/administrador"
-          element={<Administrador></Administrador>}
+          path="/administrador/*"
+          element={
+            <RutasProtegidas>
+              <RutasAdministrador></RutasAdministrador>
+            </RutasProtegidas>
+          }
         ></Route>
-        <Route
-          exact
-          path="/administrador/crear-producto"
-          element={<CrearProducto></CrearProducto>}
-        ></Route>
-        <Route
-          exact
-          path="/administrador/editar-producto"
-          element={<EditarProducto></EditarProducto>}
-        ></Route>
+      
         <Route path="*" element={<Error404></Error404>}></Route>
       </Routes>
       <Footer></Footer>
