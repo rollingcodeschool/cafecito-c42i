@@ -1,6 +1,6 @@
 // llamar a una variable de entorno
-const URL_usuario = import.meta.env.VITE_API_USUARIO
-
+const URL_usuario = import.meta.env.VITE_API_USUARIO;
+const URL_producto = import.meta.env.VITE_API_PRODUCTO;
 /*
 GET devuelven una lista de elementos o un elemento
 POST me permiten crear un elemento
@@ -29,3 +29,13 @@ export const iniciarSesion = async (usuario)=>{
        console.log(error); 
     }
 } 
+
+export const obtenerListaProductos = async()=>{
+    try{
+        const respuesta = await fetch(URL_producto);
+        const listaProductos = await respuesta.json();
+        return listaProductos;
+    }catch(error){
+        console.log(error)
+    }
+}
