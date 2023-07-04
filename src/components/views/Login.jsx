@@ -1,5 +1,6 @@
 import { Form, Button, Container, Card } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { iniciarSesion } from "../helpers/queries";
 
 const Login = () => {
   //handlesubmit se encarga del prevent default
@@ -12,6 +13,20 @@ const Login = () => {
 
   const onSubmit = (usuario) => {
     console.log(usuario);
+    iniciarSesion(usuario).then((respuesta)=>{
+      if(respuesta){
+        sessionStorage.setItem('usuario', JSON.stringify(respuesta));
+        setUsuarioLogueado(respuesta)
+        reset();
+        navegacion('/administrador');
+      }else{
+        Swal.fire(
+          'Error',
+          'El email o password son incorrectos',
+          'error'
+        )
+      }
+    })
     reset();
   };
 
