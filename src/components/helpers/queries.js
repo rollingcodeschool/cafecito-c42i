@@ -1,5 +1,4 @@
 const URL_usuario = import.meta.env.VITE_API_USUARIOS;
-console.log(URL_usuario);
 
 export const iniciarSesion = async (usuario)=>{
     try{

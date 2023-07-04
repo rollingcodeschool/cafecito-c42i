@@ -1,8 +1,12 @@
 import { Form, Button, Container, Card } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { iniciarSesion } from "../helpers/queries";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+
+
+const Login = ({setUsuarioLogueado}) => {
   //handlesubmit se encarga del prevent default
   const {
     register,
@@ -10,6 +14,7 @@ const Login = () => {
     formState: { errors },
     reset,
   } = useForm();
+  const navegacion = useNavigate();
 
   const onSubmit = (usuario) => {
     console.log(usuario);
@@ -27,7 +32,7 @@ const Login = () => {
         )
       }
     })
-    reset();
+  
   };
 
   return (
