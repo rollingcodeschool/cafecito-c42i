@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
+// eslint-disable-next-line react/prop-types
 const Login = ({setUsuarioLogueado}) => {
   const { register, handleSubmit, formState: {errors}, reset} = useForm(); 
   const navegacion = useNavigate();
