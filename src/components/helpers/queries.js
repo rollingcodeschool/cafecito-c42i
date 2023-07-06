@@ -1,4 +1,5 @@
 const URL_usuario = import.meta.env.VITE_API_USUARIOS;
+const URL_producto = import.meta.env.VITE_API_PRODUCTO;
 
 export const iniciarSesion = async (usuario)=>{
     try{
@@ -20,3 +21,13 @@ export const iniciarSesion = async (usuario)=>{
        console.log(error); 
     }
 } 
+
+export const obtenerListaProductos= async()=>{
+    try{
+     const respuesta = fetch(URL_producto);
+     const listaProductos = (await respuesta).json();
+     return listaProductos
+    }catch(error){
+     console.log(error)
+    }
+}
