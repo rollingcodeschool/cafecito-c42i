@@ -6,14 +6,14 @@ import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 
 const Administrador = () => {
-  const [productos, SetProductos] = useState([]);
+  const [productos, setProductos] = useState([]);
 
   useEffect(()=>{
     //consultar a la api y guardar la respuesta en el state
     obtenerListaProductos().then((respuesta)=>{
       //todo: preguntar si la respuesta tiene
       if(respuesta){
-        SetProductos(respuesta);
+        setProductos(respuesta);
       }else{
         Swal.fire('Error', 'Intente realizar esta operación en unos minutos', 'error');
       }
@@ -42,7 +42,7 @@ const Administrador = () => {
           </thead>
           <tbody>
             {
-              productos.map((producto)=> <ItemProducto key={producto._id} producto={producto}></ItemProducto>)
+              productos.map((producto)=> <ItemProducto key={producto._id} producto={producto} setProductos={setProductos}></ItemProducto>)
             }
           </tbody>
         </Table>

@@ -1,10 +1,10 @@
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { borrarProducto } from "../../helpers/queries";
+import { borrarProducto, obtenerListaProductos } from "../../helpers/queries";
 import Swal from "sweetalert2";
 
 
-const ItemProducto = ({producto}) => {
+const ItemProducto = ({producto,setProductos}) => {
 
   const borrar = () => {
     Swal.fire({
@@ -21,6 +21,14 @@ const ItemProducto = ({producto}) => {
         borrarProducto(producto._id).then((respuesta)=>{
           if(respuesta.status === 200){
             // eliminarProducto();
+            //pedir la lista de productos a mi backend
+            obtenerListaProductos().then((respuesta)=>{
+              if(respuesta){
+                setProductos(respuesta);
+              } else {
+                Swal.fire("Error", "Intente realizar esta operacion en unos minutos", "error");
+              }
+            })
             Swal.fire(
               'Borrado!',
               'El producto fue borrado.',
