@@ -4,7 +4,6 @@ import ItemProducto from "./producto/ItemProducto";
 import { obtenerListaProductos } from "../helpers/queries";
 import Swal from "sweetalert2";
 
-
 const Administrador = () => {
   const [productos, SetProductos] = useState([]);
 

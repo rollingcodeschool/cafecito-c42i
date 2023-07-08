@@ -4,9 +4,7 @@ import { iniciarSesion } from "../helpers/queries";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
-
-
-const Login = ({setUsuarioLogueado}) => {
+const Login = ({ setUsuarioLogueado }) => {
   //handlesubmit se encarga del prevent default
   const {
     register,
@@ -18,21 +16,16 @@ const Login = ({setUsuarioLogueado}) => {
 
   const onSubmit = (usuario) => {
     console.log(usuario);
-    iniciarSesion(usuario).then((respuesta)=>{
-      if(respuesta){
-        sessionStorage.setItem('usuario', JSON.stringify(respuesta));
-        setUsuarioLogueado(respuesta)
+    iniciarSesion(usuario).then((respuesta) => {
+      if (respuesta) {
+        sessionStorage.setItem("usuario", JSON.stringify(respuesta));
+        setUsuarioLogueado(respuesta);
         reset();
-        navegacion('/administrador');
-      }else{
-        Swal.fire(
-          'Error',
-          'El email o password son incorrectos',
-          'error'
-        )
+        navegacion("/administrador");
+      } else {
+        Swal.fire("Error", "El email o password son incorrectos", "error");
       }
-    })
-  
+    });
   };
 
   return (
@@ -62,15 +55,17 @@ const Login = ({setUsuarioLogueado}) => {
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Contraseña"
-              {...register('password', {
-                required: 'La contraseña es obligatoria',
-                pattern: {
-                  value:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/,
-                  message: 'La contraseña debe contener como minimo 8 caracteres, una mayuscula, minuscula'
-
-                }
-              })}
+              <Form.Control
+                type="password"
+                placeholder="Contraseña"
+                {...register("password", {
+                  required: "La contraseña es obligatoria",
+                  pattern: {
+                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/,
+                    message:
+                      "La contraseña debe contener como minimo 8 caracteres, una mayuscula, minuscula",
+                  },
+                })}
               />
               <Form.Text className="text-danger">
                 {errors.password?.message}
