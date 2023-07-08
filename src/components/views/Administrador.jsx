@@ -4,18 +4,19 @@ import ItemProducto from "./producto/ItemProducto";
 import { obtenerListaProductos } from "../helpers/queries";
 import Swal from "sweetalert2";
 
+
 const Administrador = () => {
-  const [productos, setProductos] = useState([]);
+  const [productos, SetProductos] = useState([]);
 
   useEffect(() => {
-    // consulta a la API
+    //consulta a la api
     obtenerListaProductos().then((respuesta) => {
       if (respuesta) {
-        setProductos(respuesta);
+        SetProductos(respuesta);
       } else {
         Swal.fire(
           "Error",
-          "Intente realizar la operación en unos minutos",
+          "Intente realizar la operacion e unos minutos",
           "error"
         );
       }
@@ -25,7 +26,7 @@ const Administrador = () => {
   return (
     <section className="container mainSection">
       <div className="d-flex justify-content-between align-items-center mt-5">
-        <h1 className="display-4">Productos disponibles</h1>
+        <h1 className="display-4 ">Productos disponibles</h1>
         <Button className="btn btn-primary" to="/administrar/crear">
           Agregar
         </Button>
@@ -43,7 +44,7 @@ const Administrador = () => {
           </tr>
         </thead>
         <tbody>
-          <ItemProducto />
+          <ItemProducto></ItemProducto>
         </tbody>
       </Table>
     </section>
