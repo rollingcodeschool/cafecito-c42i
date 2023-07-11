@@ -14,7 +14,7 @@ const Login = ({setUsuarioLogueado}) => {
   const onSubmit = (usuario)=>{
     console.log(usuario);
     iniciarSesion(usuario).then((respuesta)=>{
-      if(respuesta){
+      if(respuesta && respuesta.status === 200){
         sessionStorage.setItem('usuario', JSON.stringify(respuesta));
         setUsuarioLogueado(respuesta)
         reset();
