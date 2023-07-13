@@ -20,7 +20,8 @@ export const iniciarSesion = async (usuario)=>{
         const datos = await respuesta.json();
         return {
             status: respuesta.status,
-            nombreUsuario: datos.nombreUsuario 
+            nombreUsuario: datos.nombreUsuario,
+            token: datos.token 
         }
         
     }catch(error){
@@ -44,7 +45,8 @@ export const crearProducto = async(producto)=>{
         const respuesta = await fetch(URL_producto,{
             method: "POST",
             headers:{
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "x-token": JSON.parse(sessionStorage.getItem('usuario')).token
             },
             body: JSON.stringify(producto)
         });
@@ -58,7 +60,8 @@ export const editarProducto = async(producto, id)=>{
         const respuesta = await fetch(URL_producto+'/'+id,{
             method: "PUT",
             headers:{
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "x-token": JSON.parse(sessionStorage.getItem('usuario')).token
             },
             body: JSON.stringify(producto)
         });
@@ -70,7 +73,10 @@ export const editarProducto = async(producto, id)=>{
 export const borrarProducto = async(id)=>{
     try{
         const respuesta = await fetch(URL_producto+'/'+id,{
-            method: "DELETE"
+            method: "DELETE",
+            headers:{
+                "x-token": JSON.parse(sessionStorage.getItem('usuario')).token
+            },
         });
       return respuesta; // el status de la respuesta 200
     }catch(error){
